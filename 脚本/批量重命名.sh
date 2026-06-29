@@ -1,10 +1,10 @@
-#!/bin/bash
+#!/data/data/com.termux/files/usr/bin/bash
 # 批量重命名脚本
-# 用法: ./batch_rename.sh <目录> <前缀> <扩展名>
+# 用法: bash 批量重命名.sh <目录> <前缀> <扩展名>
 
 if [ $# -ne 3 ]; then
-    echo "用法: $0 <目录> <前缀> <扩展名>"
-    echo "示例: $0 ./photos img jpg"
+    echo "用法: bash 批量重命名.sh <目录> <前缀> <扩展名>"
+    echo "示例: bash 批量重命名.sh ./图片 照片 jpg"
     exit 1
 fi
 
@@ -14,12 +14,13 @@ EXT="$3"
 COUNT=1
 
 if [ ! -d "$DIR" ]; then
-    echo "错误：目录不存在"
+    echo "✗ 错误：目录不存在"
     exit 1
 fi
 
 cd "$DIR" || exit 1
 
+echo "开始批量重命名..."
 for file in *."$EXT"; do
     if [ -f "$file" ]; then
         NEW_NAME="${PREFIX}_$(printf "%03d" $COUNT).${EXT}"
@@ -30,4 +31,4 @@ for file in *."$EXT"; do
 done
 
 echo ""
-echo "✓ 共重命名 $((COUNT - 1)) 个文件"
+echo "✓ 完成！共重命名 $((COUNT - 1)) 个文件"
